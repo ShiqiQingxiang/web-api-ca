@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 import express from 'express';
 import {
     getUpcomingMovies, getMovies,
-    getPopularMovies, getTrendingMovies, getMovieDetails
+    getPopularMovies, getTrendingMovies, getMovie, getMovieImages, getMovieReviews
   } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';  
 
@@ -39,6 +39,36 @@ router.get('/:id', asyncHandler(async (req, res) => {
         res.status(200).json(movie);
     } else {
         res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/movie/:id', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const movie = await getMovie(id);
+    if (movie) {
+        res.status(200).json(movie);
+    } else {
+        res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/movie/:id/images', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const images = await getMovieImages(id);
+    if (images) {
+        res.status(200).json(images);
+    } else {
+        res.status(404).json({message: 'The images you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/movie/:id/reviews', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const reviews = await getMovieReviews(id);
+    if (reviews) {
+        res.status(200).json(reviews);
+    } else {
+        res.status(404).json({message: 'The reviews you requested could not be found.', status_code: 404});
     }
 }));
 
