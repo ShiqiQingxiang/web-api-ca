@@ -1,5 +1,5 @@
 import PersonHeader from "../headerPerson";
-import { getPersonImages } from "../../api/tmdb-api";
+import { getPersonImages } from "../../api/movies-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 import Grid from "@mui/material/Grid2";

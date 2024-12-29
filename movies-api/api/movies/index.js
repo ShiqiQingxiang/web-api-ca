@@ -2,8 +2,8 @@ import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import express from 'express';
 import {
-    getUpcomingMovies, getMovies,
-    getPopularMovies, getTrendingMovies, getMovie, getMovieImages, getMovieReviews
+    getUpcomingMovies, getMovies, getPerson, getPersonCredits,
+    getPopularMovies, getTrendingMovies, getMovie, getMovieImages, getMovieReviews, getMovieCredits, getPersonImages
   } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';  
 
@@ -69,6 +69,46 @@ router.get('/tmdb/movie/:id/reviews', asyncHandler(async (req, res) => {
         res.status(200).json(reviews);
     } else {
         res.status(404).json({message: 'The reviews you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/movie/:id/credits', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const credits = await getMovieCredits(id);
+    if (credits) {
+        res.status(200).json(credits);
+    } else {
+        res.status(404).json({message: 'The credits you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/person/:id/images', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const images = await getPersonImages(id);
+    if (images) {
+        res.status(200).json(images);
+    } else {
+        res.status(404).json({message: 'The images you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/person/:id', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const person = await getPerson(id);
+    if (person) {
+        res.status(200).json(person);
+    } else {
+        res.status(404).json({message: 'The person you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.get('/tmdb/person/:id/movie_credits', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const credits = await getPersonCredits(id);
+    if (credits) {
+        res.status(200).json(credits);
+    } else {
+        res.status(404).json({message: 'The credits you requested could not be found.', status_code: 404});
     }
 }));
 

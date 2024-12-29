@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
 import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid2";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getMovieImages } from "../../api/tmdb-api";
+import { getMovieImages } from "../../api/movies-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 

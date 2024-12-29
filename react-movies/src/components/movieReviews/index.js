@@ -1,4 +1,3 @@
-import React, { useEffect, useState }  from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
-import { getMovieReviews } from "../../api/tmdb-api";
+import { getMovieReviews } from "../../api/movies-api";
 import { excerpt } from "../../util";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
