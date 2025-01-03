@@ -2,7 +2,7 @@ export const getGenres = async() => {
     const response = await fetch(
       'http://localhost:8080/api/movies/tmdb/genres', {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
     )
@@ -13,7 +13,7 @@ export const getMovies = async () => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/movies`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -24,7 +24,7 @@ export const getUpcomingMovies = async () => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/upcoming`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}` 
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}` 
       }
     }
   );
@@ -35,7 +35,7 @@ export const getPopularMovies = async () => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/popular`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -46,7 +46,7 @@ export const getTrendingMovies = async () => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/trending`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -60,7 +60,7 @@ export const getMovie = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/movie/${id}`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -74,7 +74,7 @@ export const getMovieReviews = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/movie/${id}/reviews`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -88,7 +88,7 @@ export const getMovieImages = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/movie/${id}/images`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -102,7 +102,7 @@ export const getMovieCredits = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/movie/${id}/credits`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -116,7 +116,7 @@ export const getPersonImages = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/person/${id}/images`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -130,7 +130,7 @@ export const getPerson = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/person/${id}`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -144,7 +144,7 @@ export const getPersonCredits = async (args) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/person/${id}/movie_credits`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -156,7 +156,7 @@ export const addFavorite = async (favourite) => {
     `http://localhost:8080/api/movies/favourite`, {
       method: 'POST',
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       },
       body: JSON.stringify(favourite)
     }
@@ -168,7 +168,7 @@ export const getFavorites = async (userId) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/favourite/${userId}`, {
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );
@@ -180,7 +180,7 @@ export const deleteFavorite = async (userId, movieId) => {
     `http://localhost:8080/api/movies/favourite/${userId}/${movieId}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `sqqx ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }
   );

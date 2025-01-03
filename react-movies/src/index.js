@@ -30,6 +30,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
+  
   const isAuthenticated = () => {
     const token = window.localStorage.getItem("token");
     return !!token;
@@ -41,7 +42,7 @@ const App = () => {
         <SiteHeader />
         <MoviesContextProvider>
           <Routes>
-            <Route path="/movies/favorites" element={isAuthenticated() ? <FavoriteMoviesPage /> : <Navigate to="/login" />} />
+            <Route path="/movies/favorites" element={isAuthenticated() ? <FavoriteMoviesPage /> : <LoginPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
             <Route path="/movies/popular" element={<PopularMoviesPage />} />
