@@ -150,3 +150,39 @@ export const getPersonCredits = async (args) => {
   );
   return response.json();
 }
+
+export const addFavorite = async (favourite) => {
+  const response = await fetch(
+    `http://localhost:8080/api/movies/favourite`, {
+      method: 'POST',
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      },
+      body: JSON.stringify(favourite)
+    }
+  );
+  return response.json();
+}
+
+export const getFavorites = async (userId) => {
+  const response = await fetch(
+    `http://localhost:8080/api/movies/favourite/${userId}`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
+  );
+  return response.json();
+}
+
+export const deleteFavorite = async (userId, movieId) => {
+  const response = await fetch(
+    `http://localhost:8080/api/movies/favourite/${userId}/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
+  );
+  return response.json();
+}

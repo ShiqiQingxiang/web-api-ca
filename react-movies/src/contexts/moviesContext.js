@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addFavorite, deleteFavorite } from "../api/movies-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -12,15 +13,13 @@ const MoviesContextProvider = (props) => {
   };
   //console.log(myReviews);
 
-  const addToFavorites = (movie) => {
-    let newFavorites = [];
-    if (!favorites.includes(movie.id)){
-      newFavorites = [...favorites, movie.id];
+  const addToFavorites = async (movie) => {
+    try{
+      await addFavorite({userId: "123", movieId: movie.id, movieTitle: movie.title});
+      setFavorites((prev) => [...prev, movie.id]);
+    } catch(e){
+      console.log("Error adding to favorites", e.message);
     }
-    else{
-      newFavorites = [...favorites];
-    }
-    setFavorites(newFavorites)
   };
 
   const addToMustWatch = (movie) => {
@@ -36,10 +35,13 @@ const MoviesContextProvider = (props) => {
   };
   
   // We will use this function in the next step
-  const removeFromFavorites = (movie) => {
-    setFavorites( favorites.filter(
-      (mId) => mId !== movie.id
-    ) )
+  const removeFromFavorites = async (movie) => {
+    try{
+      await deleteFavorite({userId: "123", movieId: movie.id});
+      setFavorites((prev) => prev.filter((mId) => mId !== movie.id));
+    } catch(e){
+      console.log("Error removing from favorites", e.message);
+    }
   };
 
   const removeFromMustWatch = (movie) => {

@@ -1,4 +1,5 @@
 import movieModel from './movieModel';
+import favouriteModel from './favouriteModel';
 import asyncHandler from 'express-async-handler';
 import express from 'express';
 import {
@@ -30,13 +31,41 @@ router.get('/', asyncHandler(async (req, res) => {
     res.status(200).json(returnObject);
 }));
 
-
 // Get movie details
 router.get('/:id', asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id);
     const movie = await movieModel.findByMovieDBId(id);
     if (movie) {
         res.status(200).json(movie);
+    } else {
+        res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
+    }
+}));
+
+router.post('/favourite', asyncHandler(async (req, res) => {
+    const { movieId, userId, movieTitle } = req.body;
+
+    if (!movieId || !userId || !movieTitle) {
+        return res.status(400).json({message: 'Some required fields are missing.'});
+    }
+
+    const favourite = new favouriteModel({ movieId, userId, movieTitle });
+    await favourite.save();
+
+    res.status(201).json(favourite);
+}));
+
+router.get('/favourite/:userId', asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const favourites = await favouriteModel.find({ userId });
+    res.status(200).json(favourites);
+}));
+
+router.delete('/favourite/:userId/:movieId', asyncHandler(async (req, res) => {
+    const { userId, movieId } = req.params;
+    const favourite = await favouriteModel.findOneAndDelete({ userId, movieId });
+    if (favourite) {
+        res.status(200).json(favourite);
     } else {
         res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
     }
