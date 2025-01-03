@@ -16,6 +16,8 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
+import LoginPage from "./pages/loginPage";
+import RegisterPage from "./pages/registerPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,13 +30,19 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
+  const isAuthenticated = () => {
+    const token = window.localStorage.getItem("token");
+    return !!token;
+  };
+  
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
           <Routes>
-            <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+            <Route path="/movies/favorites" element={isAuthenticated() ? <FavoriteMoviesPage /> : <Navigate to="/login" />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
             <Route path="/movies/popular" element={<PopularMoviesPage />} />
             <Route path="/movies/trending" element={<TrendingMoviesPage />} />
@@ -46,6 +54,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={ <Navigate to="/" /> } />
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+            <Route path="/register" element={ <RegisterPage /> } />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
